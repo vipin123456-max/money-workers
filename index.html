@@ -1,0 +1,2503 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Money Works</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #111827;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: #111827;
+            color: white;
+            padding: 16px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        nav a:hover {
+            color: #60a5fa;
+        }
+
+        .hero {
+            min-height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(135deg, #dbeafe, #f8fafc);
+        }
+
+        .hero-content {
+            max-width: 750px;
+        }
+
+        .hero h1 {
+            font-size: 55px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #4b5563;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 13px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        section {
+            padding: 70px 7%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 35px;
+            margin-bottom: 40px;
+        }
+
+        .income-container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .balance {
+            background: #111827;
+            color: white;
+            padding: 30px;
+            border-radius: 18px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .balance p {
+            color: #cbd5e1;
+            margin-bottom: 10px;
+        }
+
+        .balance h2 {
+            font-size: 42px;
+            color: #4ade80;
+        }
+
+        .income-form {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+        }
+
+        .income-list {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .income-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5px;
+            border-bottom: 1px solid #eee;
+            gap: 15px;
+        }
+
+        .income-item:last-child {
+            border-bottom: none;
+        }
+
+        .income-name {
+            font-weight: bold;
+        }
+
+        .income-date {
+            color: #777;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+
+        .income-amount {
+            color: #16a34a;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .delete-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 7px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .delete-btn:hover {
+            background: #dc2626;
+        }
+
+        /* SHARE */
+
+.share-box {
+    max-width: 600px;
+    margin: auto;
+    background: white;
+    padding: 30px;
+    text-align: center;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.10);
+}
+
+.share-box h3 {
+    color: #111827;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.share-box p {
+    color: #6b7280;
+    margin-bottom: 20px;
+}
+
+.share-buttons {
+    display: none;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.share-buttons a {
+    padding: 11px 18px;
+    border-radius: 8px;
+    background: #2563eb;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+        /* DASHBOARD */
+
+        .cards {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: white;
+            width: 280px;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .card-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #2563eb;
+            font-size: 22px;
+            font-weight: bold;
+            line-height: 1.5;
+        }
+
+        /* REPORT */
+
+        .report-box {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .bar-row {
+            margin-bottom: 25px;
+        }
+
+        .bar-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .bar-bg {
+            height: 18px;
+            background: #e5e7eb;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .income-bar {
+            height: 100%;
+            width: 0%;
+            background: #22c55e;
+            border-radius: 20px;
+            transition: width 0.5s;
+        }
+
+        .expense-bar {
+            height: 100%;
+            width: 0%;
+            background: #ef4444;
+            border-radius: 20px;
+            transition: width 0.5s;
+        }
+
+        /* CALCULATOR */
+
+        .calculator {
+            max-width: 400px;
+            margin: auto;
+            background: #111827;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .calc-display {
+            width: 100%;
+            height: 75px;
+            background: #1f2937;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            text-align: right;
+            padding: 15px;
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .calc-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .calc-buttons button {
+            height: 60px;
+            border: none;
+            border-radius: 10px;
+            font-size: 20px;
+            cursor: pointer;
+            background: #374151;
+            color: white;
+        }
+
+        .calc-buttons button:hover {
+            background: #4b5563;
+        }
+
+        .calc-buttons .operator {
+            background: #2563eb;
+        }
+
+        .calc-buttons .equal {
+            background: #16a34a;
+        }
+
+        .calc-buttons .clear {
+            background: #dc2626;
+        }
+
+        footer {
+            background: #111827;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            header {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav {
+                justify-content: center;
+                gap: 12px;
+            }
+
+            nav a {
+                font-size: 14px;
+            }
+
+            .hero {
+                min-height: 430px;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .hero p {
+                font-size: 17px;
+            }
+
+            section {
+                padding: 50px 20px;
+            }
+
+            .section-title {
+                font-size: 29px;
+            }
+
+            .income-form {
+                grid-template-columns: 1fr;
+            }
+
+            .income-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .income-item > div:last-child {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .income-amount {
+                margin-right: 5px;
+            }
+
+            .balance h2 {
+                font-size: 34px;
+           
+         }
+         /* WEBSITE SEARCH */
+
+.site-search {
+    padding: 15px 7%;
+    background: #ffffff;
+    text-align: center;
+}
+
+.site-search input {
+    max-width: 600px;
+    padding: 14px 18px;
+    border: 1px solid #d1d5db;
+    border-radius: 30px;
+    font-size: 16px;
+}
+
+.site-search input:focus {
+    border-color: #2563eb;
+    outline: none;
+}
+         /* MONEY CHART */
+
+.chart-box {
+    max-width: 900px;
+    margin: auto;
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.chart-item {
+    margin-bottom: 25px;
+}
+
+.chart-item:last-child {
+    margin-bottom: 0;
+}
+
+.chart-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.chart-top strong {
+    color: #111827;
+}
+
+.chart-bar-bg {
+    width: 100%;
+    height: 25px;
+    background: #e5e7eb;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.chart-bar {
+    height: 100%;
+    width: 0%;
+    border-radius: 20px;
+    transition: width 0.5s ease;
+}
+
+.income-bar {
+    background: #16a34a;
+}
+
+.expense-bar {
+    background: #ef4444;
+}
+        }
+       /* DARK MODE BUTTON */
+
+.dark-btn {
+    border: none;
+    background: #374151;
+    color: white;
+    padding: 9px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.dark-btn:hover {
+    background: #4b5563;
+}
+
+
+/* DARK MODE */
+
+body.dark-mode {
+    background: #111827;
+    color: #f9fafb;
+}
+
+body.dark-mode .hero {
+    background: linear-gradient(135deg, #1f2937, #111827);
+}
+
+body.dark-mode .hero p {
+    color: #d1d5db;
+}
+
+body.dark-mode .section-title {
+    color: #f9fafb;
+}
+
+body.dark-mode .card,
+body.dark-mode .income-form,
+body.dark-mode .income-list,
+body.dark-mode .chart-box {
+    background: #1f2937;
+    color: #f9fafb;
+}
+
+body.dark-mode .card p {
+    color: #d1d5db;
+}
+
+body.dark-mode input {
+    background: #374151;
+    color: white;
+    border-color: #4b5563;
+}
+
+body.dark-mode .income-item {
+    border-color: #374151;
+}
+
+body.dark-mode .income-date {
+    color: #9ca3af;
+} 
+
+/* YOUTUBE TOOL */
+
+.youtube-box {
+    max-width: 900px;
+    margin: auto;
+    padding: 30px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.10);
+}
+
+.youtube-box h3 {
+    font-size: 25px;
+    margin-bottom: 10px;
+    color: #111827;
+}
+
+.youtube-info {
+    color: #6b7280;
+    margin-bottom: 20px;
+}
+
+.youtube-input {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.youtube-player {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 15px;
+    background: #000;
+    margin-bottom: 20px;
+}
+
+.youtube-player iframe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.youtube-open {
+    display: inline-block;
+    text-decoration: none;
+    margin-top: 5px;
+}
+
+@media (max-width: 700px) {
+
+    .youtube-input {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+/* =========================
+   DARK MODE
+========================= */
+
+function toggleDarkMode {
+
+    document body.classList.toggle("dark-mode");
+
+    if document.body.classList.contains ("dark-mode")) {
+
+        localStorage.setItem(
+            "moneyWorksDarkMode",
+            "true"
+        );
+
+     else {
+
+        localStorage.setItem(
+            "moneyWorksDarkMode",
+            "false"
+        );
+
+    }
+
+}
+
+
+/* SAVE DARK MODE */
+
+if (
+    localStorage.getItem("moneyWorksDarkMode") === "true"
+) {
+
+    document.body.classList.add("dark-mode");
+
+}/* =========================
+   PROFESSIONAL BACKGROUND
+========================= */
+
+body {
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(124, 58, 237, 0.22),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 85% 40%,
+            rgba(37, 99, 235, 0.25),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #020617,
+            #0f172a,
+            #111b4d
+        );
+
+    background-attachment: fixed;
+}
+
+
+/* =========================
+   SOCIAL MEDIA
+========================= */
+
+#social {
+    padding: 90px 7%;
+    text-align: center;
+}
+
+
+.social-heading p {
+    color: #38bdf8;
+    font-weight: bold;
+    letter-spacing: 4px;
+    margin-bottom: 15px;
+}
+
+
+.social-heading h2 {
+    color: white;
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+
+.social-heading h2 span {
+    color: #2196f3;
+}
+
+
+.social-subtitle {
+    max-width: 650px;
+    margin: auto;
+    color: #cbd5e1;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+
+/* CARDS */
+
+.social-cards {
+    max-width: 950px;
+    margin: 55px auto 0;
+
+    display: grid;
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 35px;
+}
+
+
+.social-card {
+    padding: 45px 30px;
+
+    border-radius: 25px;
+
+    background: rgba(15, 23, 42, 0.75);
+
+    border: 1px solid rgba(255,255,255,0.12);
+
+    backdrop-filter: blur(15px);
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,0.35);
+
+    transition: 0.3s;
+}
+
+
+.social-card:hover {
+    transform: translateY(-8px);
+}
+
+
+/* INSTAGRAM BORDER */
+
+.instagram-card {
+    border-color: rgba(236,72,153,0.7);
+
+    box-shadow:
+        0 0 35px rgba(236,72,153,0.15);
+}
+
+
+/* TELEGRAM BORDER */
+
+.telegram-card {
+    border-color: rgba(14,165,233,0.7);
+
+    box-shadow:
+        0 0 35px rgba(14,165,233,0.15);
+}
+
+
+/* ICON */
+
+.social-icon {
+    width: 110px;
+    height: 110px;
+
+    margin: auto auto 25px;
+
+    border-radius: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.social-icon svg {
+    width: 62px;
+    height: 62px;
+
+    fill: white;
+}
+
+
+/* INSTAGRAM ICON */
+
+.instagram-icon {
+    background:
+        linear-gradient(
+            135deg,
+            #f9ce34,
+            #ee2a7b,
+            #6228d7
+        );
+
+    box-shadow:
+        0 10px 35px rgba(236,72,153,0.35);
+}
+
+
+/* TELEGRAM ICON */
+
+.telegram-icon {
+    background: #229ed9;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 10px 35px rgba(14,165,233,0.35);
+}
+
+
+.social-card h3 {
+    color: white;
+    font-size: 30px;
+    margin-bottom: 12px;
+}
+
+
+.social-card p {
+    color: #cbd5e1;
+    font-size: 17px;
+    line-height: 1.6;
+    margin-bottom: 28px;
+}
+
+
+/* BUTTON */
+
+.social-btn {
+    display: inline-block;
+
+    padding: 14px 32px;
+
+    border-radius: 30px;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+    transition: 0.25s;
+}
+
+
+.social-btn:hover {
+    transform: scale(1.05);
+}
+
+
+.instagram-btn {
+    background:
+        linear-gradient(
+            90deg,
+            #f59e0b,
+            #ec4899,
+            #7c3aed
+        );
+}
+
+
+.telegram-btn {
+    background:
+        linear-gradient(
+            90deg,
+            #0ea5e9,
+            #2563eb
+        );
+}
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #020617, #0f172a, #1d4ed8);
+    color: white;
+    min-height: 100vh;
+}
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    #social {
+        padding: 65px 20px;
+    }
+
+    .social-heading h2 {
+        font-size: 34px;
+    }
+
+    .social-subtitle {
+        font-size: 16px;
+    }
+
+    .social-cards {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+}
+/* POPULAR VIDEOS */
+
+.popular-grid {
+    max-width: 1100px;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+.popular-card {
+    background: white;
+    padding: 20px;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,0.10);
+
+    transition: 0.3s;
+}
+
+.popular-card:hover {
+    transform: translateY(-6px);
+}
+
+.popular-thumbnail {
+    height: 180px;
+
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1d4ed8,
+            #7c3aed
+        );
+
+    margin-bottom: 18px;
+}
+
+.popular-thumbnail span {
+    width: 65px;
+    height: 65px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: white;
+    color: #2563eb;
+
+    font-size: 25px;
+}
+
+.popular-card h3 {
+    color: #111827;
+    margin-bottom: 10px;
+}
+
+.popular-card p {
+    color: #6b7280;
+    line-height: 1.5;
+    margin-bottom: 18px;
+}
+
+.watch-btn {
+    display: inline-block;
+
+    padding: 11px 18px;
+
+    border-radius: 8px;
+
+    background: #2563eb;
+    color: white;
+
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.watch-btn:hover {
+    background: #1d4ed8;
+}
+
+@media (max-width: 800px) {
+
+    .popular-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<!-- WEBSITE SEARCH -->
+
+<div class="site-search">
+
+    <input
+        type="text"
+        id="siteSearch"
+        placeholder="🔍 Search Money Works..."
+        oninput="searchWebsite()"
+    >
+
+</div>
+<header>
+
+    <div class="logo">
+        💰 Money Works
+    </div>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#income">Income</a>
+        <a href="#expense">Expense</a>
+        <a href="#report">Report</a>
+        <a href="#calculator">Calculator</a>
+        <a href="#features">Features</a>
+        <a href="#social">Social</a>
+
+    <button class="dark-btn" onclick="toggleDarkMode()">🌙</button>
+    </nav>
+
+</header>
+
+
+<!-- HOME -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <h1>Manage Your Money Smarter</h1>
+
+        <p>
+            Track your income, expenses and balance
+            easily from one place.
+        </p>
+
+        <button class="btn" onclick="goToIncome()">
+            Get Started
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- DASHBOARD -->
+
+<section id="dashboard">
+
+    <h2 class="section-title">📊 Money Dashboard</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="card-icon">💰</div>
+            <h3>Total Income</h3>
+            <p id="dashboardIncome">₹0</p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">💸</div>
+            <h3>Total Expense</h3>
+            <p id="dashboardExpense">₹0</p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">💵</div>
+            <h3>Remaining Balance</h3>
+            <p id="dashboardBalance">₹0</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- INCOME -->
+
+<section id="income">
+<!-- MONEY CHART -->
+
+<section id="moneyChart">
+
+    <h2 class="section-title">📈 Money Overview</h2>
+
+    <div class="chart-box">
+
+        <div class="chart-item">
+
+            <div class="chart-top">
+                <span>💰 Income</span>
+                <strong id="chartIncome">₹0</strong>
+            </div>
+
+            <div class="chart-bar-bg">
+                <div
+                    id="incomeBar"
+                    class="chart-bar income-bar">
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="chart-item">
+
+            <div class="chart-top">
+                <span>💸 Expense</span>
+                <strong id="chartExpense">₹0</strong>
+            </div>
+
+            <div class="chart-bar-bg">
+                <div
+                    id="expenseBar"
+                    class="chart-bar expense-bar">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+    <h2 class="section-title">💰 Income Manager</h2>
+
+    <div class="income-container">
+
+        <div class="balance">
+
+            <p>Total Income</p>
+
+            <h2 id="totalIncome">₹0</h2>
+
+        </div>
+
+        <div class="income-form">
+
+            <input
+                type="text"
+                id="incomeName"
+                placeholder="Income name"
+            >
+
+            <input
+                type="number"
+                id="incomeAmount"
+                placeholder="Amount ₹"
+            >
+
+            <button class="btn" onclick="addIncome()">
+                + Add Income
+            </button>
+
+        </div>
+
+        <div class="income-list" id="incomeList">
+
+            <p style="text-align:center;color:#777;">
+                No income added yet.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- EXPENSE -->
+
+<section id="expense">
+
+    <h2 class="section-title">💸 Expense Manager</h2>
+
+    <div class="income-container">
+
+        <div class="balance">
+
+            <p>Total Expense</p>
+
+            <h2 id="totalExpense" style="color:#f87171;">
+                ₹0
+            </h2>
+
+        </div>
+
+        <div class="income-form">
+
+            <input
+                type="text"
+                id="expenseName"
+                placeholder="Expense name"
+            >
+
+            <input
+                type="number"
+                id="expenseAmount"
+                placeholder="Amount ₹"
+            >
+
+            <button class="btn" onclick="addExpense()">
+                + Add Expense
+            </button>
+
+        </div>
+
+        <div class="income-list" id="expenseList">
+
+            <p style="text-align:center;color:#777;">
+                No expense added yet.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- REPORT -->
+
+<section id="report">
+
+    <h2 class="section-title">📈 Money Report</h2>
+
+    <div class="report-box">
+
+        <div class="bar-row">
+
+            <div class="bar-info">
+
+                <span>💰 Income</span>
+
+                <span id="reportIncome">₹0</span>
+
+            </div>
+
+            <div class="bar-bg">
+
+                <div
+                    class="income-bar"
+                    id="incomeBar">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="bar-row">
+
+            <div class="bar-info">
+
+                <span>💸 Expense</span>
+
+                <span id="reportExpense">₹0</span>
+
+            </div>
+
+            <div class="bar-bg">
+
+                <div
+                    class="expense-bar"
+                    id="expenseBar">
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CALCULATOR -->
+
+<section id="calculator">
+
+    <h2 class="section-title">🧮 Money Calculator</h2>
+
+    <div class="calculator">
+
+        <input
+            type="text"
+            id="display"
+            class="calc-display"
+            value="0"
+            readonly
+        >
+
+        <div class="calc-buttons">
+
+            <button class="clear" onclick="clearCalc()">C</button>
+
+            <button onclick="deleteLast()">⌫</button>
+
+            <button onclick="press('%')">%</button>
+
+            <button class="operator" onclick="press('/')">÷</button>
+
+
+            <button onclick="press('7')">7</button>
+            <button onclick="press('8')">8</button>
+            <button onclick="press('9')">9</button>
+
+            <button
+                class="operator"
+                onclick="press('*')">
+                ×
+            </button>
+
+
+            <button onclick="press('4')">4</button>
+            <button onclick="press('5')">5</button>
+            <button onclick="press('6')">6</button>
+
+            <button
+                class="operator"
+                onclick="press('-')">
+                −
+            </button>
+
+
+            <button onclick="press('1')">1</button>
+            <button onclick="press('2')">2</button>
+            <button onclick="press('3')">3</button>
+
+            <button
+                class="operator"
+                onclick="press('+')">
+                +
+            </button>
+
+
+            <button onclick="press('0')">0</button>
+
+            <button onclick="press('.')">.</button>
+
+            <button
+                class="equal"
+                onclick="calculate()">
+                =
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FEATURES -->
+
+<section id="features">
+
+    <h2 class="section-title">✨ Features</h2>
+
+    <div class="cards">
+
+        <div class="card">
+
+            <div class="card-icon">💰</div>
+
+            <h3>Income Tracker</h3>
+
+            <p>
+                Add your income and automatically
+                calculate total earnings.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">💸</div>
+
+            <h3>Expense Manager</h3>
+
+            <p>
+                Add and delete your daily expenses
+                and track your spending.
+            </p>
+<!-- SOCIAL MEDIA -->
+
+<section id="social">
+
+    <div class="social-heading">
+        <p>CONNECT WITH ME</p>
+
+        <h2>
+            Follow Me On
+            <span>Social Media</span>
+        </h2>
+
+        <div class="social-subtitle">
+            For latest updates, tips, and direct conversation,
+            connect with me on Instagram and Telegram.
+        </div>
+    </div>
+
+
+    <div class="social-cards">
+
+        <!-- INSTAGRAM -->
+
+        <div class="social-card instagram-card">
+
+            <div class="social-icon instagram-icon">
+
+                <svg viewBox="0 0 24 24">
+                    <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 0 1 12 7.5zm0 2A2.5 2.5 0 1 0 14.5 12 2.5 2.5 0 0 0 12 9.5zM17.5 6.5A1 1 0 1 1 16.5 7.5a1 1 0 0 1 1-1z"/>
+                </svg>
+
+            </div>
+
+            <h3>Instagram</h3>
+
+            <p>
+                Follow me for photos, updates and more.
+            </p>
+
+            <a
+                href="https://www.instagram.com/vipin_razvanshi_/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-btn instagram-btn"
+            >
+                Instagram →
+            </a>
+
+        </div>
+
+
+        <!-- TELEGRAM -->
+
+        <div class="social-card telegram-card">
+
+            <div class="social-icon telegram-icon">
+
+                <svg viewBox="0 0 24 24">
+                    <path d="M21.5 3.5 18.3 20c-.24 1.17-.87 1.46-1.76.91l-4.84-3.57-2.34 2.25c-.26.26-.48.48-.99.48l.35-4.94 8.99-8.12c.39-.35-.09-.55-.6-.2L6 13.68l-4.7-1.47c-1.02-.32-1.04-1.02.21-1.51L19.85 3.08c.87-.32 1.63.2 1.65.42z"/>
+                </svg>
+
+            </div>
+
+            <h3>Telegram</h3>
+
+            <p>
+                Join my Telegram for fast updates, tips and more.
+            </p>
+
+            <a
+                href="https://t.me/vipinrajvanshi44"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-btn telegram-btn"
+            >
+                Telegram →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">📱</div>
+
+            <h3>Mobile Friendly</h3>
+
+            <p>
+                The website works on mobile,
+                tablet and computer.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- YOUTUBE TOOL -->
+
+<section id="youtube-tool">
+
+    <h2 class="section-title">🎬 YouTube Video Tool</h2>
+
+    <div class="youtube-box">
+
+        <h3>Watch a YouTube Video</h3>
+
+        <p class="youtube-info">
+            YouTube video का link नीचे paste करें।
+        </p>
+
+        <div class="youtube-input">
+
+            <input
+                type="url"
+                id="youtubeUrl"
+                placeholder="Paste YouTube video link..."
+            >
+
+            <button
+                class="btn"
+                onclick="loadYouTubeVideo()">
+                ▶ Load Video
+            </button>
+
+        </div>
+
+        <div
+            id="youtubePlayer"
+            class="youtube-player"
+            style="display:none;">
+        </div>
+
+        <a
+            id="openYoutube"
+            class="btn youtube-open"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            style="display:none;">
+            Open in YouTube ↗
+        </a>
+
+    </div>
+<!-- POPULAR VIDEOS -->
+
+<section id="popular-videos">
+
+    <h2 class="section-title">🔥 Popular Videos</h2>
+
+    <div class="popular-grid">
+
+        <div class="popular-card">
+
+            <div class="popular-thumbnail">
+                <span>▶</span>
+            </div>
+
+            <h3>Money Management Tips</h3>
+
+            <p>
+                Learn simple ways to manage your money.
+            </p>
+
+            <a
+                href="https://www.youtube.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="watch-btn">
+                ▶ Watch Video
+            </a>
+
+        </div>
+
+
+        <div class="popular-card">
+
+            <div class="popular-thumbnail">
+                <span>▶</span>
+            </div>
+
+            <h3>Saving Money Tips</h3>
+
+            <p>
+                Simple ideas to improve your savings.
+            </p>
+
+            <a
+                href="https://www.youtube.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="watch-btn">
+                ▶ Watch Video
+            </a>
+
+        </div>
+
+
+        <div class="popular-card">
+
+            <div class="popular-thumbnail">
+                <span>▶</span>
+            </div>
+
+            <h3>Personal Finance</h3>
+
+            <p>
+                Useful financial knowledge for everyday life.
+            </p>
+
+            <a
+                href="https://www.youtube.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="watch-btn">
+                ▶ Watch Video
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- SHARE WEBSITE -->
+
+<section id="share">
+
+    <h2 class="section-title">📤 Share Money Works</h2>
+
+    <div class="share-box">
+
+        <h3>Money Works पसंद आया?</h3>
+
+        <p>अपने दोस्तों के साथ website share करें।</p>
+
+        <button class="btn" onclick="shareWebsite()">
+            📤 Share Website
+        </button>
+
+        <div id="shareButtons" class="share-buttons">
+
+            <a
+                id="whatsappShare"
+                target="_blank"
+                rel="noopener noreferrer">
+                WhatsApp
+            </a>
+
+            <a
+                id="telegramShare"
+                target="_blank"
+                rel="noopener noreferrer">
+                Telegram
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- CONTACT -->
+
+<section id="contact">
+
+    <h2 class="section-title">📞 Contact Money Works</h2>
+
+    <div class="contact-box">
+
+        <h3>Connect With Us</h3>
+
+        <p>
+            Money Works se jude rahne ke liye social media par follow karein.
+        </p>
+
+        <div class="social-buttons">
+
+            <a
+                href="https://www.instagram.com/vipin_razvanshi_/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-btn instagram">
+                📷 Instagram
+            </a>
+
+            <a
+                href="https://t.me/vipinrajvanshi44"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-btn telegram">
+                ✈️ Telegram
+            </a>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+    <p>
+        © 2026 Money Works. All Rights Reserved.
+    </p>
+
+</footer>
+
+
+<script>
+function shareWebsite() {
+
+    const websiteUrl = window.location.href;
+
+    const text =
+        "Money Works - Manage your money smarter!";
+
+    const whatsapp =
+        "https://wa.me/?text=" +
+        encodeURIComponent(text + " " + websiteUrl);
+
+    const telegram =
+        "https://t.me/share/url?url=" +
+        encodeURIComponent(websiteUrl) +
+        "&text=" +
+        encodeURIComponent(text);
+
+    document.getElementById("whatsappShare").href =
+        whatsapp;
+
+    document.getElementById("telegramShare").href =
+        telegram;
+
+    document.getElementById("shareButtons").style.display =
+        "flex";
+
+}
+
+function searchWebsite() {
+
+    const search =
+        document.getElementById("siteSearch")
+        .value
+        .toLowerCase()
+        .trim();
+
+    const sections =
+        document.querySelectorAll("section");
+
+    sections.forEach(section => {
+
+        const text =
+            section.innerText.toLowerCase();
+
+        if (search === "" || text.includes(search)) {
+
+            section.style.display = "";
+
+        } else {
+
+            section.style.display = "none";
+
+        }
+
+    });
+}
+
+/* =========================
+   HOME
+========================= */
+
+function goToIncome() {
+
+    document
+        .getElementById("income")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+/* =========================
+   DATA
+========================= */
+
+let incomes =
+    JSON.parse(
+        localStorage.getItem("moneyWorksIncome")
+    ) || [];
+
+
+let expenses =
+    JSON.parse(
+        localStorage.getItem("moneyWorksExpenses")
+    ) || [];
+
+
+/* =========================
+   INCOME
+========================= */
+
+function saveIncome() {
+
+    localStorage.setItem(
+        "moneyWorksIncome",
+        JSON.stringify(incomes)
+    );
+
+}
+
+
+function addIncome() {
+
+    const name =
+        document
+            .getElementById("incomeName")
+            .value
+            .trim();
+
+    const amount =
+        Number(
+            document
+                .getElementById("incomeAmount")
+                .value
+        );
+
+
+    if (name === "") {
+
+        alert("Please enter income name.");
+
+        return;
+    }
+
+
+    if (!amount || amount <= 0) {
+
+        alert("Please enter a valid amount.");
+
+        return;
+    }
+
+
+    incomes.push({
+
+        id: Date.now(),
+
+        name: name,
+
+        amount: amount,
+
+        date: new Date()
+            .toLocaleDateString("en-IN")
+
+    });
+
+
+    saveIncome();
+
+
+    document.getElementById("incomeName").value = "";
+
+    document.getElementById("incomeAmount").value = "";
+
+
+    showIncome();
+
+    updateDashboard();
+
+    updateReport();
+
+}
+
+
+function deleteIncome(id) {
+
+    incomes =
+        incomes.filter(
+            item => item.id !== id
+        );
+
+
+    saveIncome();
+
+    showIncome();
+
+    updateDashboard();
+
+    updateReport();
+
+}
+
+
+function showIncome() {
+
+    const list =
+        document.getElementById("incomeList");
+
+
+    let total = 0;
+
+
+    incomes.forEach(item => {
+
+        total += item.amount;
+
+    });
+
+
+    document.getElementById("totalIncome").innerText =
+        "₹" + total.toLocaleString("en-IN");
+
+
+    if (incomes.length === 0) {
+
+        list.innerHTML = `
+            <p style="text-align:center;color:#777;">
+                No income added yet.
+            </p>
+        `;
+
+        return;
+    }
+
+
+    list.innerHTML = "";
+
+
+    incomes.forEach(item => {
+
+        const div =
+            document.createElement("div");
+
+
+        div.className =
+            "income-item";
+
+
+        div.innerHTML = `
+
+            <div>
+
+                <div class="income-name">
+                    ${item.name}
+                </div>
+
+                <div class="income-date">
+                    ${item.date}
+                </div>
+
+            </div>
+
+            <div>
+
+                <span class="income-amount">
+                    +₹${item.amount.toLocaleString("en-IN")}
+                </span>
+
+                <button
+                    class="delete-btn"
+                    onclick="deleteIncome(${item.id})">
+                    Delete
+                </button>
+
+            </div>
+
+        `;
+
+
+        list.appendChild(div);
+
+    });
+
+}
+
+
+/* =========================
+   EXPENSE
+========================= */
+
+function saveExpenses() {
+
+    localStorage.setItem(
+        "moneyWorksExpenses",
+        JSON.stringify(expenses)
+    );
+
+}
+
+
+function addExpense() {
+
+    const name =
+        document
+            .getElementById("expenseName")
+            .value
+            .trim();
+
+
+    const amount =
+        Number(
+            document
+                .getElementById("expenseAmount")
+                .value
+        );
+
+
+    if (name === "") {
+
+        alert("Please enter expense name.");
+
+        return;
+    }
+
+
+    if (!amount || amount <= 0) {
+
+        alert("Please enter a valid amount.");
+
+        return;
+    }
+
+
+    expenses.push({
+
+        id: Date.now(),
+
+        name: name,
+
+        amount: amount,
+
+        date: new Date()
+            .toLocaleDateString("en-IN")
+
+    });
+
+
+    saveExpenses();
+
+
+    document.getElementById("expenseName").value = "";
+
+    document.getElementById("expenseAmount").value = "";
+
+
+    showExpenses();
+
+    updateDashboard();
+
+    updateReport();
+
+}
+
+
+function deleteExpense(id) {
+
+    expenses =
+        expenses.filter(
+            item => item.id !== id
+        );
+
+
+    saveExpenses();
+
+    showExpenses();
+
+    updateDashboard();
+
+    updateReport();
+
+}
+
+
+function showExpenses() {
+
+    const list =
+        document.getElementById("expenseList");
+
+
+    let total = 0;
+
+
+    expenses.forEach(item => {
+
+        total += item.amount;
+
+    });
+
+
+    document.getElementById("totalExpense").innerText =
+        "₹" + total.toLocaleString("en-IN");
+
+
+    if (expenses.length === 0) {
+
+        list.innerHTML = `
+            <p style="text-align:center;color:#777;">
+                No expense added yet.
+            </p>
+        `;
+
+        return;
+    }
+
+
+    list.innerHTML = "";
+
+
+    expenses.forEach(item => {
+
+        const div =
+            document.createElement("div");
+
+
+        div.className =
+            "income-item";
+
+
+        div.innerHTML = `
+
+            <div>
+
+                <div class="income-name">
+                    ${item.name}
+                </div>
+
+                <div class="income-date">
+                    ${item.date}
+                </div>
+
+            </div>
+
+            <div>
+
+                <span
+                    class="income-amount"
+                    style="color:#ef4444;">
+                    -₹${item.amount.toLocaleString("en-IN")}
+                </span>
+
+                <button
+                    class="delete-btn"
+                    onclick="deleteExpense(${item.id})">
+                    Delete
+                </button>
+
+            </div>
+
+        `;
+
+
+        list.appendChild(div);
+
+    });
+
+}
+
+
+/* =========================
+   DASHBOARD
+========================= */
+
+function updateDashboard() {
+
+    let incomeTotal = 0;
+
+    let expenseTotal = 0;
+
+
+    incomes.forEach(item => {
+
+        incomeTotal += item.amount;
+
+    });
+
+
+    expenses.forEach(item => {
+
+        expenseTotal += item.amount;
+
+    });
+
+
+    const balance =
+        incomeTotal - expenseTotal;
+
+
+    document.getElementById("dashboardIncome").innerText =
+        "₹" + incomeTotal.toLocaleString("en-IN");
+
+
+    document.getElementById("dashboardExpense").innerText =
+        "₹" + expenseTotal.toLocaleString("en-IN");
+
+
+    document.getElementById("dashboardBalance").innerText =
+        "₹" + balance.toLocaleString("en-IN");
+    // Chart update
+
+    document.getElementById("chartIncome").innerText =
+        "₹" + incomeTotal.toLocaleString("en-IN");
+
+    document.getElementById("chartExpense").innerText =
+        "₹" + expenseTotal.toLocaleString("en-IN");
+
+
+    const maximum =
+        Math.max(incomeTotal, expenseTotal, 1);
+
+
+    const incomePercent =
+        (incomeTotal / maximum) * 100;
+
+    const expensePercent =
+        (expenseTotal / maximum) * 100;
+
+
+    document.getElementById("incomeBar").style.width =
+        incomePercent + "%";
+
+    document.getElementById("expenseBar").style.width =
+        expensePercent + "%";
+}
+
+
+/* =========================
+   REPORT
+========================= */
+
+function updateReport() {
+
+    let incomeTotal = 0;
+
+    let expenseTotal = 0;
+
+
+    incomes.forEach(item => {
+
+        incomeTotal += item.amount;
+
+    });
+
+
+    expenses.forEach(item => {
+
+        expenseTotal += item.amount;
+
+    });
+
+
+    document.getElementById("reportIncome").innerText =
+        "₹" + incomeTotal.toLocaleString("en-IN");
+
+
+    document.getElementById("reportExpense").innerText =
+        "₹" + expenseTotal.toLocaleString("en-IN");
+
+
+    const highest =
+        Math.max(
+            incomeTotal,
+            expenseTotal,
+            1
+        );
+
+
+    document.getElementById("incomeBar").style.width =
+        (incomeTotal / highest * 100) + "%";
+
+
+    document.getElementById("expenseBar").style.width =
+        (expenseTotal / highest * 100) + "%";
+
+}
+
+
+/* =========================
+   CALCULATOR
+========================= */
+
+let expression = "";
+
+
+function press(value) {
+
+    if (expression === "Error") {
+
+        expression = "";
+
+    }
+
+
+    expression += value;
+
+    updateDisplay();
+
+}
+
+
+function updateDisplay() {
+
+    document.getElementById("display").value =
+        expression || "0";
+
+}
+
+
+function clearCalc() {
+
+    expression = "";
+
+    updateDisplay();
+
+}
+
+
+function deleteLast() {
+
+    expression =
+        expression.slice(0, -1);
+
+    updateDisplay();
+
+}
+
+
+function calculate() {
+
+    if (!expression) {
+
+        return;
+
+    }
+
+
+    try {
+
+        let result =
+            Function(
+                '"use strict"; return (' +
+                expression +
+                ')'
+            )();
+
+
+        if (!Number.isFinite(result)) {
+
+            throw new Error();
+
+        }
+
+
+        expression =
+            String(result);
+
+
+        updateDisplay();
+
+    }
+
+    catch {
+
+        expression = "Error";
+
+        updateDisplay();
+
+    }
+
+}
+function getYouTubeId(url) {
+
+    try {
+
+        const parsed = new URL(url);
+
+        if (parsed.hostname.includes("youtu.be")) {
+            return parsed.pathname.substring(1);
+        }
+
+        if (
+            parsed.hostname.includes("youtube.com") &&
+            parsed.searchParams.get("v")
+        ) {
+            return parsed.searchParams.get("v");
+        }
+
+        return null;
+
+    } catch {
+        return null;
+    }
+}
+
+
+function loadYouTubeVideo() {
+
+    const input =
+        document.getElementById("youtubeUrl");
+
+    const url =
+        input.value.trim();
+
+    const videoId =
+        getYouTubeId(url);
+
+    const player =
+        document.getElementById("youtubePlayer");
+
+    const openButton =
+        document.getElementById("openYoutube");
+
+
+    if (!videoId) {
+        alert("Please enter a valid YouTube link.");
+        return;
+    }
+
+
+    player.innerHTML = `
+        <iframe
+            src="https://www.youtube.com/embed/${encodeURIComponent(videoId)}"
+            title="YouTube video"
+            allowfullscreen>
+        </iframe>
+    `;
+
+    player.style.display = "block";
+
+
+    openButton.href =
+        "https://www.youtube.com/watch?v=" + videoId;
+
+    openButton.style.display =
+        "inline-block";
+}
+
+/* =========================
+   START
+========================= */
+
+showIncome();
+
+showExpenses();
+
+updateDashboard();
+
+updateReport();
+
+</script>
+
+</body>
+</html>
